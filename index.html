@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutina Diaria de Ejercicios</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<audio id="sonido-campana" src="campana.mp3" preload="auto"></audio>
+  <div class="container">
+    <h1>Rutina de Ejercicios</h1>
+
+    <select id="selector-dia">
+      <option value="">Selecciona un día</option>
+      <option value="lunes">Lunes</option>
+      <option value="martes">Martes</option>
+      <option value="miercoles">Miércoles</option>
+      <option value="jueves">Jueves</option>
+      <option value="viernes">Viernes</option>
+      <option value="sabado">Sábado</option>
+      <option value="domingo">Domingo</option>
+    </select>
+
+    <div id="contenido-dia"></div>
+
+    <div class="temporizador">
+      <h2>Descanso</h2>
+      <div id="timer-display">180 seg</div>
+      <div class="timer-buttons">
+        <button onclick="iniciarTemporizador()">Iniciar</button>
+        <button onclick="pausarTemporizador()">Pausar</button>
+        <button onclick="resetearTemporizador()">Resetear</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let tiempoRestante = 180;
+    let temporizador = null;
+
+    function actualizarDisplay() {
+      document.getElementById("timer-display").textContent = `${tiempoRestante} seg`;
+    }
+
+   function iniciarTemporizador() {
+  if (!temporizador) {
+    temporizador = setInterval(() => {
+      if (tiempoRestante > 0) {
+        tiempoRestante--;
+        actualizarDisplay();
+      } else {
+        clearInterval(temporizador);
+        temporizador = null;
+
+        // 🔔 Reproducir sonido cuando llegue a cero
+        document.getElementById("sonido-campana").play();
+      }
+    }, 1000);
+  }
+}
+
+
+    function pausarTemporizador() {
+      clearInterval(temporizador);
+      temporizador = null;
+    }
+
+    function resetearTemporizador() {
+      clearInterval(temporizador);
+      temporizador = null;
+      tiempoRestante = 180;
+      actualizarDisplay();
+    }
+
+    const rutina = {
+      lunes: [
+        "Dominadas – 4x8-10",
+        "Remo con barra Z – 4x10",
+        "Remo con mancuerna – 3x12",
+        "Curl bíceps con barra Z – 3x10",
+        "Martillo con mancuerna – 3x12",
+        "Rueda abdominal – 3x12-15"
+      ],
+      martes: [
+        "Press banca con barra – 4x10",
+        "Press inclinado con mancuernas – 3x10",
+        "Fondos – 3x12 usa chaleco si puedes",
+        "Press militar con mancuernas en banco – 4x8",
+        "Elevaciones laterales con mancuernas – 3x12",
+        "Extensión tríceps con mancuerna – 3x12"
+      ],
+      miercoles: [
+        "Sentadilla con barra – 4x8",
+        "Peso muerto rumano – 4x10",
+        "Zancadas – 3x12 por pierna",
+        "Elevación de talones – 4x20",
+        "Crunch abdominal con disco – 3x15"
+      ],
+      jueves: [
+        "Jalón al pecho con accesorio– 4x10",
+        "Remo con mancuerna – 4x12",
+        "Pullover con mancuerna o barra Z – 3x15",
+        "Curl concentración – 3x12",
+        "Curl tipo 21 con barra Z – 3 series",
+        "Planchas laterales – 3x30 seg"
+      ],
+      viernes: [
+        "Hip Thrust – 4x10",
+        "Sentadilla goblet – 3x12",
+        "Step-ups – 3x10 por pierna",
+        "Patada de glúteo – 3x15",
+        "Curl femoral – 3x15",
+        "Pantorrillas con mancuerna – 3x20",
+        "Plancha – 3x30 seg"
+      ],
+      sabado: [
+        "Saco de boxeo – 5x3 min",
+        "Sombra con guantes – 3 min",
+        "Rodillas al pecho",
+        "Bicicleta abdominal"
+      ],
+      domingo: ["Descanso total"]
+    };
+
+    document.getElementById("selector-dia").addEventListener("change", function () {
+	const enlacesEjercicios = {
+  "Dominadas": "https://www.youtube.com/watch?v=HRV5YKKaeVw",
+  "Remo con barra Z": "https://www.youtube.com/watch?v=B_RH70wZ9gU",
+  "Remo con mancuerna": "https://www.youtube.com/watch?v=pYcpY20QaE8",
+  "Curl bíceps con barra Z": "https://www.youtube.com/watch?v=kwG2ipFRgfo",
+  "Martillo con mancuerna": "https://www.youtube.com/shorts/T0txYgZGKWU",
+  "Rueda abdominal": "https://www.youtube.com/shorts/jQB00_3Ip0A",
+  "Press banca con barra": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
+  "Press inclinado con mancuernas": "https://www.youtube.com/watch?v=8iPEnn-ltC8",
+  "Fondos": "https://www.youtube.com/watch?v=2z8JmcrW-As",
+  "Press militar con mancuernas en banco": "https://www.youtube.com/watch?v=BaONy7w34-U",
+  "Elevaciones laterales con mancuernas": "https://www.youtube.com/watch?v=hgLpdwMtEEs",
+  "Extensión tríceps con mancuerna": "https://www.youtube.com/watch?v=Kjwnaqmw9bY",
+  "Sentadilla con barra": "https://www.youtube.com/watch?v=SW_C1A-rejs",
+  "Peso muerto rumano": "https://www.youtube.com/watch?v=2SHsk9AzdjA",
+  "Zancadas": "https://www.youtube.com/watch?v=QOVaHwm-Q6U",
+  "Elevación de talones": "https://www.youtube.com/watch?v=YMmgqO8Jo-k",
+  "Crunch abdominal con disco": "https://www.youtube.com/watch?v=L53ZyUzCELM",
+  "Jalón al pecho con accesorio": "https://www.youtube.com/watch?v=EA42wwLwDgs",
+  "Pullover con mancuerna o barra Z": "https://www.youtube.com/shorts/3GCpYMGMDEM",
+  "Curl concentración": "https://www.youtube.com/watch?v=0AUGkch3tzc",
+  "Curl tipo 21 con barra Z": "https://www.youtube.com/watch?v=79Yp_bR3b4s",
+  "Planchas laterales": "https://www.youtube.com/shorts/fNsxKTKfMNI",
+  "Hip Thrust": "https://www.youtube.com/shorts/bfT0eClO7bA",
+  "Sentadilla goblet": "https://www.youtube.com/shorts/2KbVt1Gl0VM",
+  "Step-ups": "https://www.youtube.com/shorts/mw6iqu9K8DY",
+  "Patada de glúteo": "https://www.youtube.com/watch?v=EULVt8GyUUQ",
+  "Curl femoral": "https://www.youtube.com/watch?v=1Tq3QdYUuHs",
+  "Pantorrillas con mancuerna": "https://www.youtube.com/shorts/p_r_JAUX7p0",
+  "Plancha": "https://www.youtube.com/watch?v=pSHjTRCQxIw",
+  "Saco de boxeo": "https://www.youtube.com/shorts/KtZmxHxyQF4",
+  "Sombra con guantes": "https://www.youtube.com/watch?v=MVUnw0GcZ1o",
+  "Rodillas al pecho": "https://www.youtube.com/shorts/MRSav_Wguhs",
+  "Bicicleta abdominal": "https://www.youtube.com/shorts/2oAwnfi3Paw"
+};
+
+document.getElementById("selector-dia").addEventListener("change", function () {
+  const dia = this.value;
+  const contenedor = document.getElementById("contenido-dia");
+  contenedor.innerHTML = "";
+
+  if (rutina[dia]) {
+    const lista = document.createElement("ul");
+
+    rutina[dia].forEach(ejercicio => {
+      const item = document.createElement("li");
+      const nombreEjercicio = ejercicio.split("–")[0].trim();
+      const enlace = enlacesEjercicios[nombreEjercicio];
+
+      item.innerHTML = `
+        <label>
+          <input type='checkbox'>
+          ${ejercicio}
+          ${enlace ? `<a href="${enlace}" target="_blank" class="enlace-ejercicio">Ver</a>` : ""}
+        </label>
+      `;
+      lista.appendChild(item);
+    });
+
+    contenedor.appendChild(lista);
+  }
+});
+
+    });
+  </script>
+</body>
+</html>
