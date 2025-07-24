@@ -1,4 +1,4 @@
-let tiempoRestante = 60;
+let tiempoRestante = 180;
 let temporizador = null;
 
 function actualizarDisplay() {
@@ -28,7 +28,7 @@ function pausarTemporizador() {
 function resetearTemporizador() {
   clearInterval(temporizador);
   temporizador = null;
-  tiempoRestante = 60;
+  tiempoRestante = 180;
   actualizarDisplay();
 }
 
